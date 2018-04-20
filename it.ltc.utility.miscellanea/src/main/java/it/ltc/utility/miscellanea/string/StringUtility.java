@@ -1,4 +1,4 @@
-package it.ltc.utility.miscellanea;
+package it.ltc.utility.miscellanea.string;
 
 /**
  * 
