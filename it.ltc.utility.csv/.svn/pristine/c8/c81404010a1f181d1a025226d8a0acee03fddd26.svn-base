@@ -1,0 +1,133 @@
+package it.ltc.utility.csv;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Classe che mappa un file .csv
+ * 
+ * @author Damiano
+ *
+ */
+public class FileCSV {
+	
+	public static final String DEFAULT_CSV_SEPARATOR = ",";
+
+	private final HashMap<String, Integer> mappaColonne;
+	private final String intestazione;
+	private final List<String[]> righe;
+
+	private FileCSV(HashMap<String, Integer> mappaColonne, String intestazione, List<String[]> righe) {
+		this.mappaColonne = mappaColonne;
+		this.intestazione = intestazione;
+		this.righe = righe;
+	}
+
+	/**
+	 * Restituisce un HashMap che contiene i nomi delle colonne e l'indice 0 based collegato.
+	 * @return la mappa nomi colonne / indici.
+	 */
+	public HashMap<String, Integer> getMappaColonne() {
+		return mappaColonne;
+	}
+
+	/**
+	 * Restituisce la riga di intestazione del file .csv, qui vi sono contenuti i nomi delle colonne usualmente.
+	 * @return la prima riga del file .csv
+	 */
+	public String getIntestazione() {
+		return intestazione;
+	}
+
+	/**
+	 * Restituisce la lista delle righe contenute nel file dove sono presenti i valori da processare.
+	 * @return una list contenente array di stringhe. Ogni array contiene i valori della riga.
+	 */
+	public List<String[]> getRighe() {
+		return righe;
+	}
+	
+	/**
+	 * Legge il file .csv passato come argomento e restituisce l'oggetto che lo mappa.
+	 * Potrebbero generarsi errori di I/O da gestire.
+	 * Verrà eseguito automaticamente un trim di spazi sui nomi dei campi e i valori e verranno eliminate le virgolette.
+	 * @param file Il file da leggere e mappare.
+	 * @return un oggetto che mappa il file .csv.
+	 * @throws Exception errori di I/O da gestire.
+	 */
+	public static FileCSV leggiFile(File file) throws Exception {
+		return leggiFile(file, true, DEFAULT_CSV_SEPARATOR);
+	}
+
+	/**
+	 * Legge il file .csv passato come argomento e restituisce l'oggetto che lo mappa.
+	 * Potrebbero generarsi errori di I/O da gestire.
+	 * @param file Il file da leggere e mappare.
+	 * @param trim specifica se i spazi e le virgolette nei titoli di colonna e dentro i campi di valore devono essere eliminati.
+	 * @return un oggetto che mappa il file .csv.
+	 * @throws Exception errori di I/O da gestire.
+	 */
+	public static FileCSV leggiFile(File file, boolean trim, String separator) throws Exception {
+		// Variabili d'appoggio
+		HashMap<String, Integer> mappaColonne;
+		String intestazione;
+		List<String[]> righe = new LinkedList<String[]>();
+		// Lettura del file
+		FileReader fileReader = new FileReader(file);
+		BufferedReader reader = new BufferedReader(fileReader);
+		String line = reader.readLine();
+		if (line != null) {
+			intestazione = line;
+			line = reader.readLine();
+		} else {
+			intestazione = null;
+		}
+		while (line != null) {
+			String[] valori = getValori(line, trim, separator);
+			righe.add(valori);
+			line = reader.readLine();
+		}
+		reader.close();
+		//Verifiche e mappaggio
+		if (intestazione == null || intestazione.isEmpty())
+			throw new RuntimeException("Il file .csv è vuoto. (intestazione vuota)");
+		if (righe.isEmpty())
+			throw new RuntimeException("Il file .csv non è stato valorizzato. (nessuna riga)");
+		mappaColonne = creaMappa(intestazione, trim, separator);
+		//Creazione oggetto
+		FileCSV csv = new FileCSV(mappaColonne, intestazione, righe);
+		return csv;
+	}
+	
+	private static String[] getValori(String line, boolean trim, String separator) {
+		String[] valori = line.split(separator);
+		if (trim) {
+			for (int index = 0; index < valori.length; index++) {
+				valori[index] = valori[index].replaceAll("\"", "");
+				valori[index] = valori[index].trim();
+			}
+		}
+		return valori;
+	}
+	
+	private static HashMap<String, Integer> creaMappa(String intestazione, boolean trim, String separator) throws Exception {
+		HashMap<String, Integer> mappaColonne = new HashMap<String, Integer>();
+		String[] nomiColonne = intestazione.split(separator);
+		if (nomiColonne.length < 2)
+			throw new RuntimeException("Il separatore usato ha generato una sola colonna per il file .csv, verificare!");
+		for (int index = 0; index < nomiColonne.length; index ++) {
+			String nomeColonna = nomiColonne[index];
+			if (trim) {
+				nomeColonna = nomeColonna.replaceAll("\"", "");
+				nomeColonna = nomeColonna.trim();
+			}
+			mappaColonne.put(nomeColonna, index);
+		}
+		return mappaColonne;
+	}
+
+}
