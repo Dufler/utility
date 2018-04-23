@@ -92,7 +92,7 @@ public class StringUtility {
 	 * @return una stringa della lunghezza voluta
 	 */
 	public String getFormattedString(String s, int length) {
-		return getFormattedString(s, length, stringPadding);
+		return getFormattedString(s, length, stringPadding, stringPaddingOrder);
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class StringUtility {
 	 * @return una stringa della lunghezza voluta con eventuali caratteri di padding.
 	 * @throws IllegalArgumentException il padding deve essere di un carattere
 	 */
-	public String getFormattedString(String s, int length, String padding) throws IllegalArgumentException {
+	public String getFormattedString(String s, int length, String padding, boolean stringPaddingOrder) throws IllegalArgumentException {
 		if (padding.length() != 1)
 			throw new IllegalArgumentException("Il padding specificato deve avere esattamente un carattere.");
 		if (s == null)

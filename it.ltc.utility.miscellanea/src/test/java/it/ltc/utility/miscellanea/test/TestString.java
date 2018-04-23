@@ -34,7 +34,7 @@ public class TestString {
 	public void testGetFormattedStringIntIntString() {
 		int n = 1;
 		int length = 5;
-		char padding = '_';
+		String padding = "_";
 		String expected = "____1";
 		String actual = su.getFormattedString(n, length, padding);
 		assertEquals(expected, actual);
@@ -55,7 +55,7 @@ public class TestString {
 		int length = 5;
 		String padding = "_";
 		String expected = "s____";
-		String actual = su.getFormattedString(s, length, padding);
+		String actual = su.getFormattedString(s, length, padding, false);
 		assertEquals(expected, actual);
 	}
 	
