@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="40" failures="0" name="it.ltc.utility.miscellanea.test.TestString" time="0.008" errors="0" skipped="0">
+<testsuite tests="40" failures="0" name="it.ltc.utility.miscellanea.test.TestString" time="0.011" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_162\jre\bin"/>
@@ -27,9 +27,9 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Users\Damiano\workspace-jee\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2712965938743473514.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Damiano\workspace-jee\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1705420803543744632.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft Windows Performance Toolkit\;C:\Users\Damiano\Desktop;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft Windows Performance Toolkit\;F:\Maven\apache-maven-3.5.3\bin;C:\Users\Damiano\Desktop;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -65,7 +65,7 @@
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringIntIntString" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringStringInt" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_1_0" time="0"/>
-  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_1_1" time="0.003"/>
+  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_1_1" time="0.004"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_1_3" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_2_0" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_00_2_1" time="0"/>
@@ -76,23 +76,23 @@
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_1_0" time="0.001"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_1_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_1_3" time="0"/>
-  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_2_0" time="0"/>
+  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_2_0" time="0.001"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_2_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_2_3" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_5_0" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_5_1" time="0"/>
-  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_5_3" time="0"/>
+  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_01_5_3" time="0.001"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_1_0" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_1_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_1_3" time="0"/>
-  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_2_0" time="0"/>
+  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_2_0" time="0.001"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_2_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_2_3" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_5_0" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_5_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_10_5_3" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_1_0" time="0"/>
-  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_1_1" time="0.001"/>
+  <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_1_1" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_1_3" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_2_0" time="0"/>
   <testcase classname="it.ltc.utility.miscellanea.test.TestString" name="testGetFormattedStringDoubleIntInt_11_2_1" time="0"/>

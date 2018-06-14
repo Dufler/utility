@@ -108,7 +108,7 @@ public class FileCSV {
 		String[] valori = line.split(separator, MAX_FIELD_LIMIT);
 		if (trim) {
 			for (int index = 0; index < valori.length; index++) {
-				valori[index] = valori[index].replaceAll("\"", "");
+				valori[index] = valori[index].replaceAll("\"", ""); //Elimina le virgolette "
 				valori[index] = valori[index].trim();
 			}
 		}
