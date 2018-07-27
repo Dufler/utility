@@ -2,6 +2,7 @@ package it.ltc.utility.miscellanea.time;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -14,7 +15,7 @@ public class DateConverter {
 	
 	public static GregorianCalendar ottieniDataPrecisa(Timestamp data, int ore) {
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTimeInMillis(data.getTime());
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
 		String tempo = Integer.toString(ore);
 		int index = tempo.length() == 5 ? 1 : 2;
 		int ora = Integer.parseInt(tempo.substring(0, index));
@@ -29,7 +30,7 @@ public class DateConverter {
 	
 	public static int getOraComeIntero(Timestamp data) {
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTimeInMillis(data.getTime());
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
 		int ora = gc.get(Calendar.HOUR_OF_DAY);
 		int minuti = gc.get(Calendar.MINUTE);
 		int secondi = gc.get(Calendar.SECOND);
@@ -39,7 +40,7 @@ public class DateConverter {
 	
 	public static Timestamp ripulisciTimestap(Timestamp data) {
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTimeInMillis(data.getTime());
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
 		gc.set(Calendar.HOUR_OF_DAY, 0);
 		gc.set(Calendar.MINUTE, 0);
 		gc.set(Calendar.SECOND, 0);

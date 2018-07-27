@@ -1,10 +1,13 @@
 package it.ltc.utility.miscellanea.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Questa classe contiene utility per la manipolazione di files.
@@ -14,6 +17,21 @@ import java.io.IOException;
  *
  */
 public class FileUtility {
+	
+	public static ArrayList<String> readLines(File file) throws IOException {
+		ArrayList<String> lines = new ArrayList<>();
+		if (file.isFile()) {
+			FileReader inputStream = new FileReader(file);
+			BufferedReader reader = new BufferedReader(inputStream);
+			String line = reader.readLine();
+			while (line != null) {
+				lines.add(line);
+				line = reader.readLine();
+			}
+			reader.close();
+		}
+		return lines;
+	}
 	
 	/**
 	 * Legge un file dal percorso specificato.
