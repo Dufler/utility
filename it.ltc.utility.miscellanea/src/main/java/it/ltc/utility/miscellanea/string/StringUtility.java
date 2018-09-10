@@ -108,16 +108,32 @@ public class StringUtility {
 			throw new IllegalArgumentException("Il padding specificato deve avere esattamente un carattere.");
 		if (s == null)
 			s = "";
+		StringBuilder sb = new StringBuilder(s);
 		for (int index = s.length(); index < length; index++) {
 			if (stringPaddingOrder)
-				s = padding + s;
+				sb.insert(0, padding);
 			else
-				s += padding;
+				sb.append(padding);
 		}			
 		if (s.length() > length)
-			s = s.substring(0, length);
-		return s;
+			sb.substring(0, length);
+		return sb.toString();
 	}
+//	public String getFormattedString(String s, int length, String padding, boolean stringPaddingOrder) throws IllegalArgumentException {
+//		if (padding.length() != 1)
+//			throw new IllegalArgumentException("Il padding specificato deve avere esattamente un carattere.");
+//		if (s == null)
+//			s = "";
+//		for (int index = s.length(); index < length; index++) {
+//			if (stringPaddingOrder)
+//				s = padding + s;
+//			else
+//				s += padding;
+//		}			
+//		if (s.length() > length)
+//			s = s.substring(0, length);
+//		return s;
+//	}
 	
 	/**
 	 * Metodo wrapper che utilizza lo spazio come carattere di padding

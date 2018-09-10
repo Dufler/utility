@@ -1,6 +1,7 @@
+it\ltc\utility\miscellanea\string\StringParser.class
 it\ltc\utility\miscellanea\time\DateConverter.class
 it\ltc\utility\miscellanea\file\FileUtility.class
-it\ltc\utility\miscellanea\file\SearchAndFilterUtility.class
 it\ltc\utility\miscellanea\hash\HashUtility.class
-it\ltc\utility\miscellanea\file\SearchUtility.class
 it\ltc\utility\miscellanea\string\StringUtility.class
+it\ltc\utility\miscellanea\file\SearchAndFilterUtility.class
+it\ltc\utility\miscellanea\file\SearchUtility.class

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Questa classe contiene utility per la manipolazione di files.
@@ -63,6 +64,23 @@ public class FileUtility {
 			inputStream.close();
 		}		
 		return file;
+	}
+	
+	/**
+	 * Metodo utilizzabile per scrivere un file in locale
+	 * @param path il percorso dove salvare il file
+	 * @param file il contenuto del file sotto forma di stringa
+	 * @return l'esito dell'operazione
+	 */
+	public static boolean writeFile(String path, List<String> lines) {
+		StringBuilder sb = new StringBuilder();
+		for (String line : lines) {
+			sb.append(line);
+			sb.append("\r\n");
+		}
+		byte[] bytes = sb.toString().getBytes();
+		boolean success = writeFile(path, bytes);
+		return success;
 	}
 	
 	/**
