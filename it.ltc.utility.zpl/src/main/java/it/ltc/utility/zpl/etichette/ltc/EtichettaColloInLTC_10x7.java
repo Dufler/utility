@@ -27,6 +27,8 @@ public class EtichettaColloInLTC_10x7 extends EtichettaColloInLTC {
 	private static final int sizeDescr = 18;
 	private static final int sizeQta = 18;
 	
+	public static final int MAX_OGGETTI = 6;
+	
 	public EtichettaColloInLTC_10x7(String cliente, String packing, String barcode, String ubicazione, String numeroCollo, ProdottoEtichetta[] prodotti, Integer totaleComplessivo) {
 		super(height, width, orientation, cliente, packing, barcode, ubicazione, numeroCollo, prodotti, totaleComplessivo);
 
@@ -83,7 +85,8 @@ public class EtichettaColloInLTC_10x7 extends EtichettaColloInLTC {
 		addBitmapTextElement(xFooter, yInit, 40, 380, ubicazioneProposta, 1);
 
 		//Numero collo
-		addScalableTextElement(781, 497, 79, 79, numeroCollo);
+		addScalableTextElement(781, 527, 105, 105, numeroCollo);
+//		addScalableTextElement(781, 497, 79, 79, numeroCollo);
 	}
 
 }

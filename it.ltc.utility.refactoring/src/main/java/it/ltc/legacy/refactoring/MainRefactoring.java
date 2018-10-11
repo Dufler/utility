@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MainRefactoring {
 	
-	public static final String rootFolderPath = "C:/Users/Damiano/Desktop/sorgente/artbo/imb/";
+	public static final String rootFolderPath = "C:/Users/Damiano/Desktop/sorgente/autrechose/imb/";
 	
 	public static final String matchToFind = "^\\s*Dim \\S+ As New ADODB.Recordset.*";
 	

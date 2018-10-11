@@ -116,7 +116,7 @@ public class StringUtility {
 				sb.append(padding);
 		}			
 		if (s.length() > length)
-			sb.substring(0, length);
+			sb.delete(length, sb.length());
 		return sb.toString();
 	}
 //	public String getFormattedString(String s, int length, String padding, boolean stringPaddingOrder) throws IllegalArgumentException {
