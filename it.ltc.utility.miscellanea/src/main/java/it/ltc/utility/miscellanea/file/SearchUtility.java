@@ -4,15 +4,30 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchUtility {
 	
 	private String folderPath;
 	private String fileName;
-	private boolean recursive;
+	private final boolean recursive;
+	private final boolean stopAtFirstMatch;
+	private final boolean ignoreCase;
 	
-	public SearchUtility(){
-		recursive = false;
+	private final List<String> matches;
+	
+	public SearchUtility() {
+		this(false, true, true);
+	}
+	
+	public SearchUtility(boolean recursive, boolean stopAtFirstMatch, boolean ignoreCase) {
+		this.recursive = recursive;
+		this.stopAtFirstMatch = stopAtFirstMatch;
+		this.ignoreCase = ignoreCase;
+		matches = new LinkedList<>();
 	}
 
 	public boolean search(String match) throws IOException {
@@ -32,7 +47,8 @@ public class SearchUtility {
 	}
 	
 	public boolean searchInFolder(File folder, String match) throws IOException {
-		boolean found = false;
+		boolean found = false; //FIXME - Quando è ricorsivo non posso azzerarlo così.
+		matches.clear();
 		File[] listaFile = folder.listFiles();
 		for (File file : listaFile) {
 			if (file.isDirectory()) {
@@ -40,22 +56,26 @@ public class SearchUtility {
 					found = searchInFolder(file, match);
 			} else {
 				System.out.println("Esamino il file: " + file.getName());
+				int lineIndex = 1;
 				FileReader reader = new FileReader(file);
 				BufferedReader buffer = new BufferedReader(reader);
 				String line = buffer.readLine();
 				while (line != null) {
-					if (line.contains(match)) {
+					if (ignoreCase ? StringUtils.containsIgnoreCase(line, match) : line.contains(match)) {
 						System.out.println("Trovato!");
 						found = true;
 						fileName = file.getAbsolutePath();
-						break;
+						matches.add(file.getAbsolutePath() + ", line " + lineIndex);
+						if (stopAtFirstMatch)
+							break;
 					}
 					line = buffer.readLine();
+					lineIndex++;
 				}
 				buffer.close();
 				reader.close();
 			}
-			if (found)
+			if (stopAtFirstMatch && found)
 				break;
 		}
 		return found;
@@ -77,8 +97,16 @@ public class SearchUtility {
 		return recursive;
 	}
 
-	public void setRecursive(boolean recursive) {
-		this.recursive = recursive;
+	public boolean isStopAtFirstMatch() {
+		return stopAtFirstMatch;
+	}
+
+	public boolean isIgnoreCase() {
+		return ignoreCase;
+	}
+
+	public List<String> getMatches() {
+		return matches;
 	}
 
 }

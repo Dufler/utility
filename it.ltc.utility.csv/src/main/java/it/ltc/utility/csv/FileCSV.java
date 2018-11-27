@@ -95,7 +95,14 @@ public class FileCSV {
 	 * @return
 	 */
 	public Integer getIndiceColonna(String colonna) {
-		return mappaColonne.get(colonna);
+		return colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+	}
+	
+	/**
+	 * Indica se la colonna è presente o meno.
+	 */
+	public boolean isColonnaPresente(String colonna) {
+		return colonna != null ? mappaColonne.containsKey(colonna.toUpperCase()) : false;
 	}
 	
 	public boolean prossimaRiga() {
@@ -104,7 +111,7 @@ public class FileCSV {
 	}
 	
 	public String getStringa(String colonna) {
-		Integer indexColonna = colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+		Integer indexColonna = getIndiceColonna(colonna);
 		return indexColonna != null ? getStringa(indexColonna, rigaAttuale) : null;
 	}
 	
@@ -113,7 +120,7 @@ public class FileCSV {
 	}
 	
 	public Double getNumerico(String colonna) {
-		Integer indexColonna = colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+		Integer indexColonna = getIndiceColonna(colonna);
 		return indexColonna != null ? getNumerico(indexColonna, rigaAttuale) : null;
 	}
 	
@@ -121,7 +128,6 @@ public class FileCSV {
 		Double valore;
 		try {
 			StringBuilder value = new StringBuilder(righe.get(numeroRiga)[colonna]);
-			//value = value.replace(',', '.');
 			for (int index = 0; index < value.length(); index++) {
 				char c = value.charAt(index);
 				switch (c) {
@@ -136,7 +142,7 @@ public class FileCSV {
 	}
 	
 	public Integer getIntero(String colonna) {
-		Integer indexColonna = colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+		Integer indexColonna = getIndiceColonna(colonna);
 		return indexColonna != null ? getIntero(indexColonna, rigaAttuale) : null;
 	}
 	
@@ -149,7 +155,7 @@ public class FileCSV {
 	}
 	
 	public Boolean getBooleano(String colonna) {
-		Integer indexColonna = colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+		Integer indexColonna = getIndiceColonna(colonna);
 		return indexColonna != null ? getBooleano(indexColonna, rigaAttuale) : null;
 	}
 	
@@ -162,7 +168,7 @@ public class FileCSV {
 	}
 	
 	public Date getData(String colonna) {
-		Integer indexColonna = colonna != null ? mappaColonne.get(colonna.toUpperCase()) : null;
+		Integer indexColonna = getIndiceColonna(colonna);
 		return indexColonna != null ? getData(indexColonna, rigaAttuale) : null;
 	}
 	
@@ -253,130 +259,5 @@ public class FileCSV {
 		}
 		return mappaColonne;
 	}
-	
-//	public static final String DEFAULT_CSV_SEPARATOR = ",";
-//	public static final int MAX_FIELD_LIMIT = 100;
-//
-//	private final HashMap<String, Integer> mappaColonne;
-//	private final String intestazione;
-//	private final List<String[]> righe;
-//
-//	private FileCSV(HashMap<String, Integer> mappaColonne, String intestazione, List<String[]> righe) {
-//		this.mappaColonne = mappaColonne;
-//		this.intestazione = intestazione;
-//		this.righe = righe;
-//	}
-//
-//	/**
-//	 * Restituisce un HashMap che contiene i nomi delle colonne e l'indice 0 based collegato.
-//	 * @return la mappa nomi colonne / indici.
-//	 */
-//	public HashMap<String, Integer> getMappaColonne() {
-//		return mappaColonne;
-//	}
-//
-//	/**
-//	 * Restituisce la riga di intestazione del file .csv, qui vi sono contenuti i nomi delle colonne usualmente.
-//	 * @return la prima riga del file .csv
-//	 */
-//	public String getIntestazione() {
-//		return intestazione;
-//	}
-//
-//	/**
-//	 * Restituisce la lista delle righe contenute nel file dove sono presenti i valori da processare.
-//	 * @return una list contenente array di stringhe. Ogni array contiene i valori della riga.
-//	 */
-//	public List<String[]> getRighe() {
-//		return righe;
-//	}
-//	
-//	/**
-//	 * Restituisce l'indice della colonna specificata, <code>null</code> se non esiste.
-//	 * @param colonna
-//	 * @return
-//	 */
-//	public Integer getIndiceColonna(String colonna) {
-//		return mappaColonne.get(colonna);
-//	}
-//	
-//	/**
-//	 * Legge il file .csv passato come argomento e restituisce l'oggetto che lo mappa.
-//	 * Potrebbero generarsi errori di I/O da gestire.
-//	 * Verrà eseguito automaticamente un trim di spazi sui nomi dei campi e i valori e verranno eliminate le virgolette.
-//	 * @param file Il file da leggere e mappare.
-//	 * @return un oggetto che mappa il file .csv.
-//	 * @throws Exception errori di I/O da gestire.
-//	 */
-//	public static FileCSV leggiFile(File file) throws Exception {
-//		return leggiFile(file, true, DEFAULT_CSV_SEPARATOR, DEFAULT_CSV_SEPARATOR);
-//	}
-//
-//	/**
-//	 * Legge il file .csv passato come argomento e restituisce l'oggetto che lo mappa.
-//	 * Potrebbero generarsi errori di I/O da gestire.
-//	 * @param file Il file da leggere e mappare.
-//	 * @param trim specifica se i spazi e le virgolette nei titoli di colonna e dentro i campi di valore devono essere eliminati.
-//	 * @return un oggetto che mappa il file .csv.
-//	 * @throws Exception errori di I/O da gestire.
-//	 */
-//	public static FileCSV leggiFile(File file, boolean trim, String headerSeparator, String fieldSeparator) throws Exception {
-//		// Variabili d'appoggio
-//		HashMap<String, Integer> mappaColonne;
-//		String intestazione;
-//		List<String[]> righe = new LinkedList<String[]>();
-//		// Lettura del file
-//		FileReader fileReader = new FileReader(file);
-//		BufferedReader reader = new BufferedReader(fileReader);
-//		String line = reader.readLine();
-//		if (line != null) {
-//			intestazione = line;
-//			line = reader.readLine();
-//		} else {
-//			intestazione = null;
-//		}
-//		while (line != null) {
-//			String[] valori = getValori(line, trim, fieldSeparator);
-//			righe.add(valori);
-//			line = reader.readLine();
-//		}
-//		reader.close();
-//		//Verifiche e mappaggio
-//		if (intestazione == null || intestazione.isEmpty())
-//			throw new RuntimeException("Il file .csv è vuoto. (intestazione vuota)");
-//		if (righe.isEmpty())
-//			throw new RuntimeException("Il file .csv non è stato valorizzato. (nessuna riga)");
-//		mappaColonne = creaMappa(intestazione, trim, headerSeparator);
-//		//Creazione oggetto
-//		FileCSV csv = new FileCSV(mappaColonne, intestazione, righe);
-//		return csv;
-//	}
-//	
-//	private static String[] getValori(String line, boolean trim, String separator) {
-//		String[] valori = line.split(separator, MAX_FIELD_LIMIT);
-//		if (trim) {
-//			for (int index = 0; index < valori.length; index++) {
-//				valori[index] = valori[index].replaceAll("\"", ""); //Elimina le virgolette "
-//				valori[index] = valori[index].trim();
-//			}
-//		}
-//		return valori;
-//	}
-//	
-//	private static HashMap<String, Integer> creaMappa(String intestazione, boolean trim, String separator) throws Exception {
-//		HashMap<String, Integer> mappaColonne = new HashMap<String, Integer>();
-//		String[] nomiColonne = intestazione.split(separator);
-//		if (nomiColonne.length < 2)
-//			throw new RuntimeException("Il separatore usato ha generato una sola colonna per il file .csv, verificare!");
-//		for (int index = 0; index < nomiColonne.length; index ++) {
-//			String nomeColonna = nomiColonne[index];
-//			if (trim) {
-//				nomeColonna = nomeColonna.replaceAll("\"", "");
-//				nomeColonna = nomeColonna.trim();
-//			}
-//			mappaColonne.put(nomeColonna, index);
-//		}
-//		return mappaColonne;
-//	}
 
 }

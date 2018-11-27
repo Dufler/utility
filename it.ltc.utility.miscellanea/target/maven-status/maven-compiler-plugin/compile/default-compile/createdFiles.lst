@@ -1,7 +1,12 @@
 it\ltc\utility\miscellanea\string\StringParser.class
 it\ltc\utility\miscellanea\time\DateConverter.class
 it\ltc\utility\miscellanea\file\FileUtility.class
+it\ltc\utility\miscellanea\string\ObjectParser.class
 it\ltc\utility\miscellanea\hash\HashUtility.class
 it\ltc\utility\miscellanea\string\StringUtility.class
+it\ltc\utility\miscellanea\classes\ClassFinder.class
 it\ltc\utility\miscellanea\file\SearchAndFilterUtility.class
+it\ltc\utility\miscellanea\string\annotation\TipoCampo.class
 it\ltc\utility\miscellanea\file\SearchUtility.class
+it\ltc\utility\miscellanea\string\annotation\Campo.class
+it\ltc\utility\miscellanea\string\StringValueParser.class

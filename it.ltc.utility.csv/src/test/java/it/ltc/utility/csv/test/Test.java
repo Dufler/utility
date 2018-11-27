@@ -1,11 +1,9 @@
 package it.ltc.utility.csv.test;
 
-import static org.junit.Assert.fail;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -42,7 +40,7 @@ public class Test {
 		writer.write(INTESTAZIONE + NEW_LINE + RIGA);
 		writer.flush();
 		writer.close();
-		csv = FileCSV.leggiFile(fileCSV);
+		csv = FileCSV.leggiFile(fileCSV, true, ",", ",");
 		//File csv due
 		String testFilePath_2 = TEST_PATH + TEST_FILE_NAME;
 		fileCSV_2 = new File(testFilePath_2);
@@ -56,14 +54,9 @@ public class Test {
 	@org.junit.Test
 	public void testGetMappaColonne() {
 		//Test sulla mappa, per ogni colonna controllo il nome e l'indice. 
-		HashMap<String, Integer> mappa = csv.getMappaColonne();
 		for (String indiceColonna : INDICI_COLONNE) {
 			String colonna = "colonna" + indiceColonna;
-			if (mappa.containsKey(colonna)) {
-				assertEquals(mappa.get(colonna).toString(), indiceColonna);
-			} else {
-				fail("La colonna '" + indiceColonna + "' non è presente!");
-			}
+			assertEquals(csv.isColonnaPresente(colonna), true);
 		}
 	}
 
@@ -90,12 +83,10 @@ public class Test {
 		List<String[]> righe_2 = csv_2.getRighe();
 		assertEquals(righe_2.size(), 1);
 		String[] riga_2 = righe_2.get(0);
-		HashMap<String, Integer> mappa = csv.getMappaColonne();
-		HashMap<String, Integer> mappa_2 = csv_2.getMappaColonne();
 		for (String indiceColonna : INDICI_COLONNE) {
 			String colonna = "colonna" + indiceColonna;
-			Integer indice = mappa.get(colonna);
-			Integer indice_2 = mappa_2.get(colonna);
+			Integer indice = csv.getIndiceColonna(colonna);
+			Integer indice_2 = csv_2.getIndiceColonna(colonna);
 			assertEquals(riga[indice], riga_2[indice_2]);
 		}
 	}

@@ -9,7 +9,7 @@ import java.util.TimeZone;
  * @author Damiano
  *
  */
-public class StringParser {
+public class StringParser extends StringValueParser {
 	
 	public static final String PATTERN_DATA_COMPLETA = "yyyyMMddhhmmss";
 	public static final String PATTERN_DATA_SEMPLICE = "yyyyMMdd";
@@ -63,30 +63,34 @@ public class StringParser {
 		return s;
 	}
 	
+	/**
+	 * Parsa la stringa contenuta tra i due indici passati come argomento.
+	 * @param s l'indice di partenza.
+	 * @param e l'indica di fine.
+	 * @return la stringa parsata oppure <code>null</code> in caso di problemi.
+	 */
 	public String getStringa(int s, int e) {
-		String v;
-		try {
-			v = line.substring(s, e).trim();
-		} catch (Exception exception) {
-			v = null;
-		}
-		return v;
+		return getStringa(line, s, e);
+	}
+	
+	/**
+	 * Parsa il booleano contenuto nella stringa tra i due indici passati come argomento.
+	 * @param s l'indice di partenza.
+	 * @param e l'indica di fine.
+	 * @return il booleano parsato oppure <code>null</code> in caso di problemi.
+	 */
+	public Boolean getBooleano(int s, int e) {
+		return getBooleano(line, s, e);
 	}
 	
 	/**
 	 * Parsa l'intero contenuta nella stringa tra i due indici passati come argomento.
 	 * @param s l'indice di partenza.
 	 * @param e l'indica di fine.
-	 * @return l'intero parsato oppure -1 in caso di problemi.
+	 * @return l'intero parsato oppure <code>null</code> in caso di problemi.
 	 */
-	public int getIntero(int s, int e) {
-		int i;
-		try {
-			i = Integer.parseInt(line.substring(s, e).trim());
-		} catch (Exception exception) {
-			i = -1;
-		}
-		return i;
+	public Integer getIntero(int s, int e) {
+		return getIntero(line, s, e);
 	}
 	
 	/**
@@ -94,17 +98,21 @@ public class StringParser {
 	 * @param s l'indice di partenza.
 	 * @param e l'indica di fine.
 	 * @param dp il numero di decimali
-	 * @return il double parsato oppure -1 in caso di problemi.
+	 * @return il double parsato oppure <code>null</code> in caso di problemi.
 	 */
-	public double getDecimale(int s, int e, int dp) {
-		double d;
-		try {
-			d = Double.parseDouble(line.substring(s, e));
-			d = d / Math.pow(10, dp);
-		} catch (Exception exception) {
-			d = -1;
-		}
-		return d;
+	public Double getDecimale(int s, int e, int dp) {
+		return getDecimale(line, s, e, dp);
+	}
+	
+	/**
+	 * Parsa una data contenuta nella stringa tra i due indici passati come argomento.<br>
+	 * La data è semplice e non ha data e ora.
+	 * @param s l'indice di partenza.
+	 * @param e l'indica di fine.
+	 * @return La data parsata o <code>null</code> in caso di problemi.
+	 */
+	public Date getData(int s, int e, String dateFormat) {
+		return getData(dateFormat, s, e, dateFormat);
 	}
 
 	/**
@@ -117,7 +125,7 @@ public class StringParser {
 	public Date getDataSoloGiorno(int s, int e) {
 		Date data;
 		try {
-			data = sdfDataSemplice.parse(line.substring(s, e));
+			data = sdfDataSemplice.parse(line.substring(s, e).trim());
 		} catch (Exception exception) {
 			data = null;
 		}
@@ -135,7 +143,7 @@ public class StringParser {
 	public Date getDataEOra(int sd, int ed, int sh, int eh) {
 		Date dataeora;
 		try {
-			String data = line.substring(sd, ed);
+			String data = line.substring(sd, ed).trim();
 			String ora = line.substring(sh, eh).trim();
 			while (ora.length() < eh - sh)
 				ora = ora + "0";
