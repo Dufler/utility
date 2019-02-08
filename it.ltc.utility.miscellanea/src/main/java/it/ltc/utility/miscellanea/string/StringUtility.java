@@ -27,10 +27,7 @@ public class StringUtility {
 	 * - padding stringhe con " " a destra
 	 */
 	public StringUtility() {
-		numericPadding = DEFAULT_NUMERIC_PADDING;
-		stringPadding = DEFAULT_STRING_PADDING;
-		numericPaddingOrder = DEFAULT_NUMERIC_ORDER;
-		stringPaddingOrder = DEFAULT_STRING_ORDER;
+		this(DEFAULT_NUMERIC_PADDING, DEFAULT_STRING_PADDING, DEFAULT_NUMERIC_ORDER, DEFAULT_STRING_ORDER);
 	}
 	
 	/**
@@ -51,6 +48,98 @@ public class StringUtility {
 		stringPadding = sPadding;
 		numericPaddingOrder = nOrder;
 		stringPaddingOrder = sOrder;
+	}
+	
+	public String getVanilla(String s) {
+		if (s != null) {
+			s = removeAccent(s);
+			s = getAscii(s);
+			s = removeExtraSpaces(s);
+		}
+		return s;
+	}
+	
+	public String getAscii(String s) {
+		if (s != null) {
+			s = s.replaceAll("[^\\dA-Za-z \\.\\,;:\\-\\_/\\\\]", " ");
+		}
+		return s;
+	}
+	
+	public String removeAccent(String s) {
+		if (s != null) {
+			//A - ÀÁÂÃÄÅ
+			s = s.replace('À', 'A');
+			s = s.replace('Á', 'A');
+			s = s.replace('Â', 'A');
+			s = s.replace('Ã', 'A');
+			s = s.replace('Ä', 'A');
+			s = s.replace('Å', 'A');
+			//E - ÈÉÊË
+			s = s.replace('È', 'E');
+			s = s.replace('É', 'E');
+			s = s.replace('Ê', 'E');
+			s = s.replace('Ë', 'E');
+			//I - ÌÍÎÏ
+			s = s.replace('Ì', 'I');
+			s = s.replace('Í', 'I');
+			s = s.replace('Î', 'I');
+			s = s.replace('Ï', 'I');
+			//O - ÒÓÔÕÖ
+			s = s.replace('Ò', 'O');
+			s = s.replace('Ó', 'O');
+			s = s.replace('Ô', 'O');
+			s = s.replace('Õ', 'O');
+			s = s.replace('Ö', 'O');
+			//U - ÙÚÛÜ
+			s = s.replace('Ù', 'U');
+			s = s.replace('Ú', 'U');
+			s = s.replace('Û', 'U');
+			s = s.replace('Ü', 'U');
+			//a - àáâãäå
+			s = s.replace('à', 'a');
+			s = s.replace('á', 'a');
+			s = s.replace('â', 'a');
+			s = s.replace('ã', 'a');
+			s = s.replace('ä', 'a');
+			s = s.replace('å', 'a');
+			//e - èéêë
+			s = s.replace('è', 'e');
+			s = s.replace('é', 'e');
+			s = s.replace('ê', 'e');
+			s = s.replace('ë', 'e');
+			//i - ìíîï
+			s = s.replace('ì', 'i');
+			s = s.replace('í', 'i');
+			s = s.replace('î', 'i');
+			s = s.replace('ï', 'i');
+			//o - òóôõö
+			s = s.replace('ò', 'o');
+			s = s.replace('ó', 'o');
+			s = s.replace('ô', 'o');
+			s = s.replace('õ', 'o');
+			s = s.replace('ö', 'o');
+			//u - ùúûü
+			s = s.replace('ù', 'u');
+			s = s.replace('ú', 'u');
+			s = s.replace('û', 'u');
+			s = s.replace('ü', 'u');
+			//c - Çç
+			s = s.replace('Ç', 'C');
+			s = s.replace('ç', 'c');
+			//n - Ññ
+			s = s.replace('Ñ', 'N');
+			s = s.replace('ñ', 'n');
+		}
+		return s;
+	}
+	
+	public String removeExtraSpaces(String s) {
+		if (s != null) {
+			s = s.trim();
+			s = s.replaceAll("\\s+", " ");
+		}
+		return s;
 	}
 	
 	/**

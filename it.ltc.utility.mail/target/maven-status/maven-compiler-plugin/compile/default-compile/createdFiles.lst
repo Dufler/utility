@@ -1,3 +1,4 @@
 it\ltc\utility\mail\Email.class
 it\ltc\utility\mail\MailMan.class
 it\ltc\utility\mail\MailAuthenticator.class
+it\ltc\utility\mail\MailConfiguration.class

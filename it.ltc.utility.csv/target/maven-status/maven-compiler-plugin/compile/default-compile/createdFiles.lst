@@ -1,1 +1,7 @@
+it\ltc\utility\csv\annotation\CampoCSV.class
+it\ltc\utility\csv\CSVObjectParser.class
 it\ltc\utility\csv\FileCSV.class
+it\ltc\utility\csv\annotation\TipoCampo.class
+it\ltc\utility\csv\annotation\OrdinatoreCampi.class
+it\ltc\utility\csv\CSVObjectMapper.class
+it\ltc\utility\csv\CSVObjectExporter.class

@@ -1,1 +1,3 @@
 it\ltc\utility\configuration\Configuration.class
+it\ltc\utility\configuration\ConfigurationParser.class
+it\ltc\utility\configuration\Localizer.class

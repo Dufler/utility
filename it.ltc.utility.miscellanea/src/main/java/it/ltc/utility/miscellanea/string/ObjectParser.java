@@ -35,7 +35,7 @@ public class ObjectParser<T> extends StringValueParser {
 		if (!mappaClassi.containsKey(c)) {
 			logger.debug("Eseguo il mappaggio per la classe " + c.getSimpleName());
 			HashMap<Field, Campo> mappaCampi = new HashMap<>();
-			for (Field field : c.getFields()) {
+			for (Field field : c.getDeclaredFields()) {
 				Campo annotazioneCampo = field.getAnnotation(Campo.class);
 				if (annotazioneCampo != null) {
 					logger.debug("Trovata annotazione per il campo " + field.getName());
@@ -116,7 +116,7 @@ public class ObjectParser<T> extends StringValueParser {
 				}
 				list.add(object);
 			} catch (InstantiationException | IllegalAccessException e) {
-				logger.error(e);
+				logger.error(e.getMessage(), e);
 			}
 		}		
 		return list;

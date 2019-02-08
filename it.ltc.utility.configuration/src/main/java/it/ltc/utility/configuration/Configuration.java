@@ -42,33 +42,13 @@ public class Configuration {
 	}
 	
 	/**
-	 * Crea un oggetto di configurazione vuoto.
-	 * Vi va impostata manualmente la configurazione.
-	 * Esempio di utilizzo:
-	 * Configuration customConfiguration = new Configuration();
-	 * customConfiguration.getProperties().put("myKey", "myValue");
-	 * 
-	 */
-	public Configuration() {
-		properties = new Properties();
-		configFileInputStream = null;
-		configFilePath = null;
-	}
-	
-	/**
 	 * Crea un oggetto di configurazione a partire dalle impostazioni di sistema e il file di configurazione specificato.
 	 * Lo stream viene chiuso una volta completata la lettura.
 	 * @param configFileInputStream lo stream di input del file di configurazione.
 	 * @throws IOException nel caso in cui sia impossibile leggere dallo stream passato come parametro.
 	 */
 	public Configuration(InputStream stream) throws IOException {
-		properties = System.getProperties();
-		configFileInputStream = stream;
-		configFilePath = null;
-		if (configFileInputStream != null) {
-			properties.load(configFileInputStream);
-			configFileInputStream.close();
-		}	
+		this(stream, true);
 	}
 	
 	/**
@@ -90,7 +70,7 @@ public class Configuration {
 		if (configFileInputStream != null) {
 			properties.load(configFileInputStream);
 			configFileInputStream.close();
-		}	
+		}
 	}
 	
 	/**
@@ -106,20 +86,7 @@ public class Configuration {
 	 * @throws IOException nel caso in cui sia impossibile leggere dal path passato come parametro.
 	 */
 	public Configuration(String filePath, boolean system) throws IOException {
-		if (system) {
-			properties = System.getProperties();
-		} else {
-			properties = new Properties();
-		}
-		configFilePath = filePath;
-		configFileInputStream = getStream(configFilePath);
-		if (configFileInputStream != null) {
-			properties.load(configFileInputStream);
-			configFileInputStream.close();
-		} else {
-			throw new IOException("Il file di configurazione specificato non esiste. path: " + configFilePath);
-		}
-					
+		this(getStream(filePath), system);					
 	}
 	
 	/**
@@ -155,8 +122,11 @@ public class Configuration {
 		return update;
 	}
 	
-	public static InputStream getStream(String path) {
-		return Configuration.class.getResourceAsStream(path);
+	public static InputStream getStream(String path) throws IOException {
+		InputStream stream = Configuration.class.getResourceAsStream(path);
+		if (stream == null)
+			throw new IOException("Il file di configurazione specificato non esiste. path: " + path);
+		return stream;
 	}
 	
 	public void setConfigFilePath(String path) {

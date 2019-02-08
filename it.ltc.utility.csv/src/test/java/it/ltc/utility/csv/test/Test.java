@@ -40,7 +40,7 @@ public class Test {
 		writer.write(INTESTAZIONE + NEW_LINE + RIGA);
 		writer.flush();
 		writer.close();
-		csv = FileCSV.leggiFile(fileCSV, true, ",", ",");
+		csv = FileCSV.leggiFile(fileCSV, true, ",", ",",  FileCSV.DEFAULT_DATE_FORMAT);
 		//File csv due
 		String testFilePath_2 = TEST_PATH + TEST_FILE_NAME;
 		fileCSV_2 = new File(testFilePath_2);
@@ -48,7 +48,7 @@ public class Test {
 		writer_2.write(INTESTAZIONE_2 + NEW_LINE + RIGA_2);
 		writer_2.flush();
 		writer_2.close();
-		csv_2 = FileCSV.leggiFile(fileCSV_2, true, ";", ";");
+		csv_2 = FileCSV.leggiFile(fileCSV_2, true, ";", ";", FileCSV.DEFAULT_DATE_FORMAT);
 	}
 
 	@org.junit.Test

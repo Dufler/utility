@@ -49,7 +49,7 @@ public class FTP {
 				login = ftpClient.login(username, password);
 			} catch (IOException e) {
 				login = false;
-				logger.error(e);
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return login;
@@ -60,7 +60,7 @@ public class FTP {
 			try {
 				ftpClient.disconnect();
 			} catch (IOException e) {
-				logger.error(e);
+				logger.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class FTP {
 					contenuto.add(file.getName());
 			}
 		}  catch (IOException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
         }
 		logout();
 		return contenuto;
@@ -101,8 +101,7 @@ public class FTP {
 					contenuto.add(file.getName());
 			}
 		}  catch (IOException e) {
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
         }
 		logout();
 		return contenuto;
@@ -123,8 +122,7 @@ public class FTP {
 		    inputStream.close();
 		} catch (IOException e) {
 			upload = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
         }
 		logout();
 		return upload;
@@ -144,8 +142,7 @@ public class FTP {
 			download = ftpClient.retrieveFile(remoteRelativePath, outputStream);
 		} catch (IOException e) {
 			download = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
         }
 		logout();
 		return download;
@@ -158,8 +155,7 @@ public class FTP {
 			ftpClient.rename(from, to);
 		} catch (IOException e) {
 			rename = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
         }
 		logout();
 		return rename;
@@ -178,8 +174,7 @@ public class FTP {
 			delete = ftpClient.deleteFile(remoteRelativePath);
 		} catch (IOException e) {
 			delete = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		logout();
 		return delete;
@@ -197,8 +192,7 @@ public class FTP {
 			create = ftpClient.makeDirectory(remoteRelativePath);
 		} catch (IOException e) {
 			create = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		logout();
 		return create;
@@ -216,8 +210,7 @@ public class FTP {
 			delete = ftpClient.removeDirectory(remoteRelativePath);
 		} catch (IOException e) {
 			delete = false;
-			//e.printStackTrace();
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		logout();
 		return delete;

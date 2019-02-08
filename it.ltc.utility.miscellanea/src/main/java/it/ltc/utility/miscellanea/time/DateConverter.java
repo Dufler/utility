@@ -47,5 +47,40 @@ public class DateConverter {
 		gc.set(Calendar.MILLISECOND, 0);
 		return new Timestamp(gc.getTimeInMillis());
 	}
+	
+	public static GregorianCalendar ottieniDataPrecisa(Date data, int ore) {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
+		String tempo = Integer.toString(ore);
+		int index = tempo.length() == 5 ? 1 : 2;
+		int ora = Integer.parseInt(tempo.substring(0, index));
+		int minuti = Integer.parseInt(tempo.substring(index, index + 2));
+		int secondi = Integer.parseInt(tempo.substring(index + 2));
+		gc.set(Calendar.HOUR_OF_DAY, ora);
+		gc.set(Calendar.MINUTE, minuti);
+		gc.set(Calendar.SECOND, secondi);
+		gc.set(Calendar.MILLISECOND, 0);
+		return gc;
+	}
+	
+	public static int getOraComeIntero(Date data) {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
+		int ora = gc.get(Calendar.HOUR_OF_DAY);
+		int minuti = gc.get(Calendar.MINUTE);
+		int secondi = gc.get(Calendar.SECOND);
+		int totale = ora * 10000 + minuti * 100 + secondi;
+		return totale;
+	}
+	
+	public static Timestamp ripulisciTimestap(Date data) {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(data != null ? data.getTime() : new Date().getTime());
+		gc.set(Calendar.HOUR_OF_DAY, 0);
+		gc.set(Calendar.MINUTE, 0);
+		gc.set(Calendar.SECOND, 0);
+		gc.set(Calendar.MILLISECOND, 0);
+		return new Timestamp(gc.getTimeInMillis());
+	}
 
 }

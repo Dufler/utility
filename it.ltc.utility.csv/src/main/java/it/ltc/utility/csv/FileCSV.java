@@ -24,6 +24,9 @@ public class FileCSV {
 
 	private final SimpleDateFormat sdf;
 	
+	private final String nomeFile;
+	private final String pathFile;
+	
 	private final HashMap<String, Integer> mappaColonne;
 	private final String intestazione;
 	private final ArrayList<String[]> righe;
@@ -31,15 +34,25 @@ public class FileCSV {
 	private int rigaAttuale;
 
 	public FileCSV(HashMap<String, Integer> mappaColonne, String intestazione, ArrayList<String[]> righe) {
-		this(mappaColonne, intestazione, righe, DEFAULT_DATE_FORMAT);
+		this(mappaColonne, intestazione, righe, DEFAULT_DATE_FORMAT, null, null);
 	}
 	
-	public FileCSV(HashMap<String, Integer> mappaColonne, String intestazione, ArrayList<String[]> righe, String dateFormat) {
+	public FileCSV(HashMap<String, Integer> mappaColonne, String intestazione, ArrayList<String[]> righe, String dateFormat, String fileName, String filePath) {
 		this.mappaColonne = mappaColonne;
 		this.intestazione = intestazione;
 		this.righe = righe;
 		this.rigaAttuale = -1;
 		this.sdf = new SimpleDateFormat(dateFormat);
+		this.nomeFile = fileName;
+		this.pathFile = filePath;
+	}
+	
+	public String getNomeFile() {
+		return nomeFile;
+	}
+	
+	public String getPathFile() {
+		return pathFile;
 	}
 
 	public int getRigaAttuale() {
@@ -189,7 +202,7 @@ public class FileCSV {
 	 * @throws Exception errori di I/O da gestire.
 	 */
 	public static FileCSV leggiFile(File file) throws Exception {
-		return leggiFile(file, true, DEFAULT_CSV_SEPARATOR, DEFAULT_CSV_SEPARATOR);
+		return leggiFile(file, true, DEFAULT_CSV_SEPARATOR, DEFAULT_CSV_SEPARATOR, DEFAULT_DATE_FORMAT);
 	}
 
 	/**
@@ -200,7 +213,7 @@ public class FileCSV {
 	 * @return un oggetto che mappa il file .csv.
 	 * @throws Exception errori di I/O da gestire.
 	 */
-	public static FileCSV leggiFile(File file, boolean trim, String headerSeparator, String fieldSeparator) throws Exception {
+	public static FileCSV leggiFile(File file, boolean trim, String headerSeparator, String fieldSeparator, String dateFormat) throws Exception {
 		// Variabili d'appoggio
 		HashMap<String, Integer> mappaColonne;
 		String intestazione;
@@ -228,7 +241,7 @@ public class FileCSV {
 			throw new RuntimeException("Il file .csv non è stato valorizzato. (nessuna riga)");
 		mappaColonne = creaMappa(intestazione, trim, headerSeparator);
 		//Creazione oggetto
-		FileCSV csv = new FileCSV(mappaColonne, intestazione, righe);
+		FileCSV csv = new FileCSV(mappaColonne, intestazione, righe, dateFormat, file.getName(), file.getPath());
 		return csv;
 	}
 	
