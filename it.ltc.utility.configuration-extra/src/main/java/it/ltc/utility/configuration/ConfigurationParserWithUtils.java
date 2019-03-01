@@ -3,6 +3,7 @@ package it.ltc.utility.configuration;
 import java.util.List;
 
 import it.ltc.utility.ftp.FTP;
+import it.ltc.utility.ftp.SFTP;
 import it.ltc.utility.mail.MailConfiguration;
 import it.ltc.utility.mail.MailMan;
 
@@ -11,7 +12,7 @@ import it.ltc.utility.mail.MailMan;
  * @author Damiano
  *
  */
-public class ConfigurationParserWithUtils extends ConfigurationParser {
+public abstract class ConfigurationParserWithUtils extends ConfigurationParser {
 	
 	public ConfigurationParserWithUtils(String configPath) {
 		super(configPath);
@@ -75,6 +76,24 @@ public class ConfigurationParserWithUtils extends ConfigurationParser {
 		String ftpUser = configuration.get(keyUser);
 		String ftpPassword = configuration.get(keyPassword);
 		FTP client = new FTP(ftpHost, ftpUser, ftpPassword);
+		return client;
+	}
+	
+	/**
+	 * Restituisce un client SFTP. (versione sicura del protocollo FTP)
+	 * 
+	 * @return un client FTP gia' configurato.
+	 */
+	public SFTP getSFTPClient() {
+		SFTP client = getSFTPClient("sftp_host", "sftp_user", "sftp_password");
+		return client;
+	}
+	
+	protected SFTP getSFTPClient(String keyHost, String keyUser, String keyPassword) {
+		String ftpHost = configuration.get(keyHost);
+		String ftpUser = configuration.get(keyUser);
+		String ftpPassword = configuration.get(keyPassword);
+		SFTP client = new SFTP(ftpHost, ftpUser, ftpPassword);
 		return client;
 	}
 

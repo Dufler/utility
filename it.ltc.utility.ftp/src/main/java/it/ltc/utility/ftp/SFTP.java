@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.ChannelSftp.LsEntry;
@@ -14,6 +16,8 @@ import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
 
 public class SFTP {
+	
+	private static final Logger logger = Logger.getLogger(SFTP.class);
 	
 	private final static int PORT = 22;
 
@@ -29,7 +33,6 @@ public class SFTP {
 		host = pathToHost;
 		username = user;
 		password = pwd;
-		
 	}
 	
 	public boolean connect() {
@@ -42,7 +45,7 @@ public class SFTP {
 			connesso = true;
 		} catch (JSchException e) {
 			session = null;
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return connesso;
 	}
@@ -75,7 +78,7 @@ public class SFTP {
 		    }
 		    sftpChannel.exit();
 		} catch (JSchException | SftpException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return files;
 	}
@@ -98,7 +101,7 @@ public class SFTP {
 		    }
 		    sftpChannel.exit();
 		} catch (JSchException | SftpException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return files;
 	}
@@ -116,7 +119,8 @@ public class SFTP {
 		    download = true;
 		    sftpChannel.exit();
 		} catch (JSchException | SftpException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
+			//logger.error(e.getMessage(), e);
 		}
 		return download;
 	}
@@ -140,7 +144,7 @@ public class SFTP {
 		    upload = true;
 		    sftpChannel.exit();
 		} catch (JSchException | SftpException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return upload;
 	}
@@ -157,7 +161,7 @@ public class SFTP {
 		    sftpChannel.rename(remotePath, newName);
 		    rename = true;
 		} catch (JSchException | SftpException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return rename;
 	}

@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class FTP {
 	
-	private static final Logger logger = Logger.getLogger("FTP");
+	private static final Logger logger = Logger.getLogger(FTP.class);
 	
 	private final String host, username, password;
 	
