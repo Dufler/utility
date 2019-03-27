@@ -59,6 +59,12 @@ public class XLStoCSV {
 				while (titleCellIterator.hasNext()) {
 					cell = titleCellIterator.next();
 					String nomeColonna = formatString(cell.getStringCellValue()).toUpperCase().trim();
+					
+					//fix per gli idioti che duplicano i nomi delle colonne ma che hanno comunque valori diversi all'interno.
+					if (mappaColonne.containsKey(nomeColonna)) {
+						nomeColonna = nomeColonna + "_" + titleIndex;
+					}
+					
 					nomiColonne[titleIndex] = nomeColonna;
 					
 					sb.append(nomeColonna);
@@ -119,9 +125,9 @@ public class XLStoCSV {
 				nomiColonne = null;
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return csv;
 	}
@@ -172,14 +178,15 @@ public class XLStoCSV {
 			fos.close();
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 	
 	private static String formatString(String s) {
 		s = s.replace("\n", " ");
+		s = s.trim();
 		return s;
 	}
 }

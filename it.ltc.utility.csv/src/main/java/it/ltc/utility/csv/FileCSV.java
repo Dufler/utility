@@ -71,7 +71,8 @@ public class FileCSV {
 	public List<String> checkColonne(String... nomiColonne) {
 		List<String> colonneMancanti = new LinkedList<>();
 		for (String colonna : nomiColonne) {
-			if (!mappaColonne.containsKey(colonna)) {
+			String key = colonna != null ? colonna.toUpperCase() : ""; //FIX: Le colonne vengono sempre inserite in uppercase.
+			if (!mappaColonne.containsKey(key)) {
 				colonneMancanti.add(colonna);
 			}
 		}
