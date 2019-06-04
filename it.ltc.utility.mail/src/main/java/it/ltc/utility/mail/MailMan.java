@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -159,8 +160,8 @@ public class MailMan {
 	 * @param mail la mail da inviare
 	 * @return l'esito dell'operazione
 	 */
-	public boolean invia(List<String> destinatari, Email mail) {
-		boolean invio = true;
+	public boolean invia(Set<String> destinatari, Email mail) {
+		boolean invio;
 		MimeMessage message = new MimeMessage(session);
 		try {
 			message.setFrom(new InternetAddress(config.getAccount()));
@@ -186,6 +187,7 @@ public class MailMan {
 				 message.setText(mail.getMessaggio());
 			 }			 
 			 Transport.send(message);
+			 invio = true;
 		} catch (MessagingException e) {
 			invio = false;
 			logger.error(e.getMessage(), e);

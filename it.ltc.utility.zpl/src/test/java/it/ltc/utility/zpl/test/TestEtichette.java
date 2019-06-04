@@ -149,7 +149,7 @@ public class TestEtichette {
 	
 	
 	public static void main(String[] args) throws Exception {
-		//stampaEtichettaLTC();
+		stampaEtichettaLTC();
 		//stampaEtichettaProdotto_320x500();
 		List<String[]> productsQuantities = readFile();
 		for (String[] productQuantity : productsQuantities) {

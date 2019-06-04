@@ -15,9 +15,6 @@ public class CSVObjectParser<T> {
 	
 	private static final Logger logger = Logger.getLogger(CSVObjectParser.class);
 	
-//	@SuppressWarnings("rawtypes")
-//	private static final HashMap<Class, HashMap<Field, CampoCSV>> mappaClassi = new HashMap<>();
-	
 	protected final Class<T> c;
 	protected final HashMap<CampoCSV, Field> mappaCampi;
 	
@@ -26,29 +23,13 @@ public class CSVObjectParser<T> {
 		this.mappaCampi = CSVObjectMapper.mappaClasse(c);
 	}
 	
-//	protected HashMap<Field, CampoCSV> mappaClasse() {
-//		if (!mappaClassi.containsKey(c)) {
-//			logger.debug("Eseguo il mappaggio per la classe " + c.getSimpleName());
-//			HashMap<Field, CampoCSV> mappaCampi = new HashMap<>();
-//			for (Field field : c.getFields()) {
-//				CampoCSV annotazioneCampo = field.getAnnotation(CampoCSV.class);
-//				if (annotazioneCampo != null) {
-//					logger.debug("Trovata annotazione per il campo " + field.getName());
-//					mappaCampi.put(field, annotazioneCampo);
-//				}
-//			}
-//			mappaClassi.put(c, mappaCampi);
-//		}
-//		return mappaClassi.get(c);
-//	}
-	
 	protected Object estraiValore(CampoCSV annotazioneCampo, FileCSV csv, Field field) {
 		Object value;
 		String colonna = annotazioneCampo.name();
 		String valore = csv.getStringa(colonna);
 		if (valore == null && annotazioneCampo.useDefaultValueOnError())
 			valore = annotazioneCampo.defaultValue();
-		else if (valore.isEmpty() && annotazioneCampo.useDefaultValueIfEmpty())
+		else if ((valore == null || valore.isEmpty()) && annotazioneCampo.useDefaultValueIfEmpty())
 			valore = annotazioneCampo.defaultValue();
 		
 		Class<?> type = field.getType();

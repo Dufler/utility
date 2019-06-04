@@ -1,6 +1,6 @@
 package it.ltc.utility.configuration;
 
-import java.util.List;
+import java.util.Set;
 
 import it.ltc.utility.ftp.FTP;
 import it.ltc.utility.ftp.SFTP;
@@ -41,8 +41,8 @@ public abstract class ConfigurationParserWithUtils extends ConfigurationParser {
 	 * 
 	 * @return una lista di indirizzi mail a cui verranno spedite le notifiche.
 	 */
-	public List<String> getIndirizziDestinatari() {
-		List<String> destinatari = getStringList("email_destinatari_indirizzi", ",");
+	public Set<String> getIndirizziDestinatari() {
+		Set<String> destinatari = getStringList("email_destinatari_indirizzi", ",");
 		return destinatari;
 	}
 
@@ -51,13 +51,13 @@ public abstract class ConfigurationParserWithUtils extends ConfigurationParser {
 	 * 
 	 * @return una lista di indirizzi mail a cui verranno spedite le notifiche.
 	 */
-	public List<String> getIndirizziResponsabili() {
-		List<String> destinatari = getStringList("email_destinatari_responsabili_indirizzi", ",");
+	public Set<String> getIndirizziResponsabili() {
+		Set<String> destinatari = getStringList("email_destinatari_responsabili_indirizzi", ",");
 		return destinatari;
 	}
 	
-	public List<String> getIndirizziDestinatariErrori() {
-		List<String> destinatari = getStringList("email_destinatari_indirizzi_errori", ",");
+	public Set<String> getIndirizziDestinatariErrori() {
+		Set<String> destinatari = getStringList("email_destinatari_indirizzi_errori", ",");
 		return destinatari;
 	}
 	

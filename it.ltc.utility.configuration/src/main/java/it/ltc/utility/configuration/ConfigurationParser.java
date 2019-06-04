@@ -2,8 +2,8 @@ package it.ltc.utility.configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -43,8 +43,8 @@ public abstract class ConfigurationParser {
 	 * 
 	 * @return una lista di indirizzi mail a cui verranno spedite le notifiche.
 	 */
-	protected List<String> getStringList(String key, String splitter) {
-		List<String> destinatari = new LinkedList<String>();
+	protected Set<String> getStringList(String key, String splitter) {
+		Set<String> destinatari = new HashSet<String>();
 		String indirizzi = configuration.get(key);
 		for (String indirizzo : indirizzi.split(splitter))
 			destinatari.add(indirizzo);
